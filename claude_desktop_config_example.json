@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+        "wireshark": {
+            "command": "python",
+            "args": [
+                "E:\\MCP\\Wireshark_mcp\\wireshark_mcp\\server.py",
+                "--transport",
+                "stdio"
+            ]
+        }
+    }
+}

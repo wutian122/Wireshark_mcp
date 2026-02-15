@@ -1,0 +1,61 @@
+# Wireshark MCP 配置文件
+# 仅使用 AbuseIPDB 威胁情报源
+
+threat_intel:
+  # AbuseIPDB API Key（单个）
+  # 注册地址: https://www.abuseipdb.com/register
+  # 免费额度: 每天 1000 次查询
+  abuseipdb_api_key: "${ABUSEIPDB_API_KEY}"
+
+  # 多 Key 轮询配置（可选）
+  # 配置多个 Key 可以扩展每日查询额度
+  # 例如配置3个Key = 每天3000次查询
+  abuseipdb_api_keys:
+    # - key: "YOUR_API_KEY_1"
+    #   name: "account1"
+    #   enabled: true
+    #   weight: 100
+
+    # - key: "YOUR_API_KEY_2"
+    #   name: "account2"
+    #   enabled: true
+    #   weight: 100
+
+  # API Key 轮换策略
+  api_key_rotation:
+    # 轮换策略: smart(智能) / round_robin(轮询) / weighted(加权)
+    strategy: "smart"
+    # 健康检查间隔（秒）
+    health_check_interval: 300
+    # 失败阈值（连续失败次数后标记为不可用）
+    failure_threshold: 3
+    # 恢复检查间隔（秒）
+    recovery_check_interval: 600
+    # 速率限制退避时间（秒）
+    rate_limit_backoff: 3600
+
+wireshark:
+  # 默认抓包接口 (Windows通常为数字，Linux为eth0等)
+  # 使用 tshark -D 命令查看可用接口
+  default_interface: "1"
+  # TShark 路径 (如果不在系统PATH中需要指定完整路径)
+  tshark_path: "tshark"
+  # 最低版本要求
+  min_version: "3.0.0"
+
+server:
+  host: "127.0.0.1"
+  port: 3000
+
+# ==========================================
+# AbuseIPDB API Key 申请指南
+# ==========================================
+# 1. 注册地址: https://www.abuseipdb.com/register
+# 2. 选择 "Individual" (个人) 计划注册（免费）
+# 3. 验证邮箱并登录
+# 4. 点击顶部导航栏的 "API" -> 点击 "Create Key"
+# 5. 免费额度: 每天 1000 次查询
+#
+# 如需更多查询额度，可以：
+# - 注册多个账号获取多个 Key（配置在 abuseipdb_api_keys 列表中）
+# - 升级到付费计划

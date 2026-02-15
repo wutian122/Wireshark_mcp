@@ -1,0 +1,40 @@
+threat_intel:
+  # 微步在线 API Key
+  threatbook_api_key: ""
+  
+  # 多 Key 轮换配置 (可选)
+  threatbook_api_keys:
+    - key: "YOUR_KEY_1"
+      name: "account1"
+      enabled: true
+      weight: 100
+    - key: "YOUR_KEY_2"
+      name: "account2"
+      enabled: true
+      weight: 100
+      
+  # VirusTotal API Key (新增)
+  virustotal_api_key: ""
+  
+  # AbuseIPDB API Key (新增)
+  abuseipdb_api_key: ""
+  
+  # API Key 轮换策略
+  api_key_rotation:
+    strategy: "smart"  # smart: 智能均衡, sequential: 顺序轮询, random: 随机选择
+    health_check_interval: 300  # 健康检查间隔(秒)
+    failure_threshold: 3        # 连续失败阈值
+    recovery_check_interval: 600 # 恢复检查间隔(秒)
+    rate_limit_backoff: 3600    # 触发限流后的避让时间(秒)
+
+wireshark:
+  # 默认抓包接口 (Windows通常为数字，Linux为eth0等)
+  default_interface: "9"
+  # TShark 路径 (如果不在系统PATH中)
+  tshark_path: "tshark"
+  # 最低版本要求
+  min_version: "3.0.0"
+
+server:
+  host: "127.0.0.1"
+  port: 3000
